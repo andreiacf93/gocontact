@@ -1,0 +1,135 @@
+<!--
+O desafio consiste no desenvolvimento de uma página web que permita inserir 3 cidades.
+Mostrar um gráfico de barras com as temperaturas por cidade.
+Adicionalmente, deve mostrar numa tabela as cidades, temperatura e a hora de início do dia e da noite.
+A comunicação com APIs publicas tem de ser feita por uma API interna em node.js.
+A página web apenas deverá invocar a API interna.
+A API interna deve registar os pedidos feitos num ficheiro de log.
+-->
+
+
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Desafio Técnico</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" href="weather.css">
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="footer-distributed-with-address-and-phones.css">
+
+    <link rel="stylesheet" href="weather.css" type="text/css">
+    <meta name="keywords" content="footer, address, phone, icons" />
+    <link rel="stylesheet" href="demo.css"> -->
+    <link rel="stylesheet" href="footer-distributed-with-address-and-phones.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet'>
+
+</head>
+<body>
+<div class="jumbotron" style="margin-bottom: 8px; color: white; background-color: #0f6674;">
+    <h2 class="text-center" style="font-size:50px; font-weight:600; font-family: 'Megrim'; background-color: #0f6674" >Previsão Meteorológica</h2>
+</div>
+<div class="container">
+    <div class="row" style="margin-bottom: 20px;">
+        <h3 class="text-center" style="font-size:20px; font-family: 'SourceSansPro-ExtraLight'; color: #0f6674">Escreva o nome da cidade</h3>
+        <span id="error"></span>
+    </div>
+    <div class="row form-group form-inline" id="rowDiv">
+        <input type="text" name="city" id="city" class="form-control" placeholder="Cidade" style="font-family: 'SourceSansPro-ExtraLight'; color: #0f6674;">
+        <button id="searchWeather" class="btn btn-primary" style="font-family: 'SourceSansPro-ExtraLight'; color: white; background-color: #0f6674; border-color: #0f6674; font-size: medium">Pesquisar</button>
+    </div>
+    <div id="show"></div>
+</div>
+<div><br><br></div>
+<div>
+    <table class="table table-striped hidden">
+        <tr><td class="col-xs-2">Cidade :</td><td class="col-xs-10" id="city"></td></tr>
+        <tr><td class="col-xs-2">Coordenadas:</td><td class="col-xs-10" id="coord"></td></tr>
+        <tr><td class="col-xs-2">Tempo:</td><td class="col-xs-10" id="icon"></td></tr>
+        <tr><td class="col-xs-2">Temperatura:</td><td class="col-xs-10" id="temp"></td></tr>
+        <tr><td class="col-xs-2">Pressão:</td><td class="col-xs-10" id="presssure"></td></tr>
+        <tr><td class="col-xs-2">Descrição </td><td class="col-xs-10" id="description"></td></tr>
+    </table>
+</div>
+<!-- <article class="media">
+<div class="media-left">
+    <figure class="image is-50x50">
+        <img src="http://openweathermap.org/img/w/<%= weather.icon%>.png" alt="Image">
+    </figure>
+</div>
+<div class="media-content">
+    <div class="content">
+        <p>
+            <span class="name_of_city"><%= weather.city%></span>
+            <br>
+            <span class="info"><%= weather.temperature%>º C</span>
+            <br><%= weather.description%>
+        </p>
+    </div>
+</div>
+</article> -->
+<body>
+<div><br><br></div>
+
+</body>
+<div><br><br></div>
+<!--widget ESTÁTICO PARA TESTE-->
+<!--<a class="weatherwidget-io" href="https://forecast7.com/pt/40d71n74d01/new-york/" data-label_1="AVEIRO" data-label_2="WEATHER" data-font="SourceSansPro-ExtraLight" data-icons="Climacons Animated" data-mode="Forecast" data-theme="pure" data-lowcolor="#0f6674" >AVEIRO</a>
+<script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+</script>-->
+
+<!--footer-->
+<footer class="footer-distributed">
+    <div class="footer-left">
+        <p class="footer-company-name"> Desafio Técnico &copy; Abril 2019</p>
+        <div class="footer-icons" style="padding-left: 20px">
+            <a href="https://www.linkedin.com/in/castroferreira/" target="_blank"><i class="fa fa-linkedin"></i></a>
+            <a href="https://github.com/andreiacf93/gocontact" target="_blank"><i class="fa fa-github"></i></a>
+        </div>
+    </div>
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span><b>PCI - Parque de Ciência e Inovação</b><br>Edificío 3, 1º andar 3830-352 Ílhavo<br>Aveiro, Portugal</span></p>
+        </div>
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>Telefone: 800 456 456</p>
+        </div>
+
+    </div>
+    <div class="footer-right">
+        <p class="footer-company-about">
+            <span>Sobre a <b>GoContact</b></span>
+            A GoContact é uma empresa que desenvolve software inovador de IPBX e de Contact Center, ambos na cloud.
+        </p>
+
+    </div>
+</footer>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.slim.min.js"
+        integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI="
+        crossorigin="anonymous"></script>
+<!-- <script src="public\js\bootstrap.min.js"></script> -->
+<!-- 
+<script src="weather.css"></script>
+<script src="demo.css"></script>
+<script src="footer-distributed-with-address-and-phones.css"></script> -->
+
+</body>
+</html>

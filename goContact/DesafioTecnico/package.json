@@ -1,0 +1,36 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "Technical challenge",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreiacf93/gocontact.git"
+  },
+  "author": "Andreia Ferreira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andreiacf93/gocontact/issues"
+  },
+  "homepage": "https://github.com/andreiacf93/gocontact#readme",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-ejs-layouts": "^2.5.0",
+    "jquery": "^3.4.0",
+    "moment": "^2.24.0",
+    "path": "^0.12.7",
+    "popper.js": "^1.15.0",
+    "request": "^2.88.0",
+    "weatherjs": "0.0.7"
+  },
+  "devDependencies": {
+    "css-loader": "^2.1.1",
+    "ws": "3.3.2"
+  }
+}
