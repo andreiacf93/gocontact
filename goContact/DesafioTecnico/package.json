@@ -1,0 +1,22 @@
+{
+  "name": "weather_1",
+  "version": "1.0.0",
+  "description": "Simple weather application",
+  "main": "Server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "andreia ferreira",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "google-charts": "^2.0.0"
+  }
+}
