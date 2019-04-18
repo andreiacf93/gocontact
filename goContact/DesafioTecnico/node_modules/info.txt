@@ -1,0 +1,8 @@
+DESAFIO TÉCNICO:
+
+O desafio consiste no desenvolvimento de uma página web que permita inserir 3 cidades.
+Mostrar um gráfico de barras com as temperaturas por cidade.
+Adicionalmente, deve mostrar numa tabela as cidades, temperatura e a hora de início do dia e da noite.
+A comunicação com APIs publicas tem de ser feita por uma API interna em node.js.
+A página web apenas deverá invocar a API interna.
+A API interna deve registar os pedidos feitos num ficheiro de log.
