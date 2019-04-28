@@ -71,7 +71,22 @@
 
   <!-- tabela (cidade, temperatura, hora de inicio do dia e da noite) -->
   <div id="tableContainer">
-    <table id="table_div"></table>
+    <table>
+      <tr>
+        <th>Cidade</th>
+        <th>Temperatura Minima</th>
+        <th>Temperatura Maxima</th>
+        <th>Início do dia</th>
+        <th>Início da noite</th>
+      </tr>
+      <tr>
+        <td><%= cityname %></td>
+        <td><%= temp_min %></td>
+        <td><%= temp_max %></td>
+        <td><%= sunrise %></td>
+        <td><%= sunset %></td>
+      </tr>
+    </table>
   </div>
 
   <script type="text/javascript">
@@ -80,6 +95,12 @@
       var cidade = "<%= cityname %>";
       var temperatura = "<%= temp %>";
       var humidade = "<%= humiditydiv %>";
+
+      var min = "<%= temp_min %>";
+      var max = "<%= temp_max %>";
+      var dia = "<%= sunrise %>";
+      var noite = "<%= sunset %>";
+
 
       if (cidade.charAt(0) != "<") {
         console.log(cidade);
@@ -94,6 +115,26 @@
       if (humidade.charAt(0) != "<") {
         console.log(humidade);
         document.getElementById("humiditydiv").innerHTML = "Humidade: " + humidade;
+      }
+
+      if (dia.charAt(0) != "<") {
+        console.log(dia);
+        document.getElementById("sunrise").innerHTML = dia;
+      }
+
+      if (noite.charAt(0) != "<") {
+        console.log(noite);
+        document.getElementById("sunset").innerHTML = noite;
+      }
+
+      if (min.charAt(0) != "<") {
+        console.log(min);
+        document.getElementById("temp_min").innerHTML = min;
+      }
+
+      if (max.charAt(0) != "<") {
+        console.log(max);
+        document.getElementById("temp_max").innerHTML = max;
       }
 
       var chart = new CanvasJS.Chart("chart_div", {
@@ -114,7 +155,7 @@
           dataPoints: [
             { label: cidade, y: 25 }
           ]
-        }]
+        }].push()
       });
       chart.render();
 
@@ -126,26 +167,16 @@
       //   chart.render();
       // });
 
-      // function addTable(chart) {
-      //   var tableData = "";
-      //   for (var i = 0; i < chart.data.length; i++) {
-      //     tableData += "<br><br><tr>"
-      //       + "<th>Cidade</th>"
-      //       + "<th>Temperatura Minima</th>"
-      //       + "<th>Temperatura Maxima</th>"
-      //       + "<th>Início do dia</th>"
-      //       + "<th>Início da noite</th>"
-      //       + "<td>" + chart.data[i].name + "</td>";
-      //     // + "<td style='color:" + chart.data[i].color + "'>&#0f67748a;" + chart.data[i].name + "</td>";
-      //     + "</tr><tr>"
-      //     for (var j = 0; j < chart.data[i].dataPoints.length; j++) {
-      //       tableData += ("<td>" + chart.data[i].dataPoints[j].y + "</td>")
-      //     }
-      //     tableData += "</tr>";
-      //   }
-      //   $("#table_div").append(tableData)
-      // }
-      // addTable(chart);
+      function addTable(chart) {
+        var tableData = "";
+        for (var i = 0; i < chart.data.length; i++) {
+          for (var j = 0; j < chart.data[i].dataPoints.length; j++) {
+            tableData += ("<td>" + chart.data[i].dataPoints[j].y + "</td>")
+          }
+        }
+        $("#table_div").append(tableData)
+      }
+      addTable(chart);
     } 
   </script>
 

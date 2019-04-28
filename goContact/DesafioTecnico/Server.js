@@ -60,11 +60,21 @@ app.post('/weathersearch', (req, res) => {
         var temp = `${parseInt(weather.main.temp - 273)}ºC`;
         var humiditydiv = `${weather.main.humidity}%`;
 
+        var temp_min = `${parseInt(weather.main.temp_min - 273)}ºC`;
+        var temp_max = `${parseInt(weather.main.temp_max - 273)}ºC`;
+
+        var lat;
+        var lng;
+        var api_sun = `https://api.sunrise-sunset.org/json?lat=${lat}lng=${lng}`
+        let sun = JSON.parse(body)
+        var sunrise = `${sun.sunrise}`;
+        var sunset = `${sun.sunset}`;
+
         var file = require('./myjsonfile.json');
-        file.table.push({ cityname: cityname, temp: temp, humiditydiv: humiditydiv });
+        file.table.push({ cityname: cityname, temp: temp, humiditydiv: humiditydiv, temp_min: temp_min, temp_max: temp_max, sunrise: sunrise, sunset: sunset });
         fs.writeFileSync('myjsonfile.json', JSON.stringify(file), 'utf-8');
 
-        var renderedHtml = ejs.render(content, { cityname: cityname, temp: temp, humiditydiv: humiditydiv });  //get rendered HTML code
+        var renderedHtml = ejs.render(content, { cityname: cityname, temp: temp, humiditydiv: humiditydiv, temp_min: temp_min, temp_max: temp_max, sunrise: sunrise, sunset: sunset });  //get rendered HTML code
         res.end(renderedHtml);
       })
     }

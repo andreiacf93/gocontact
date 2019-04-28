@@ -1,1 +1,40 @@
-{"table":[]}
+{
+    "table": [
+        {
+            "cityname": "Espinho",
+            "temp": "22ºC",
+            "humiditydiv": "68%",
+            "temp_min": "19ºC",
+            "temp_max": "26ºC",
+            "sunrise": "undefined",
+            "sunset": "undefined"
+        },
+        {
+            "cityname": "Guarda",
+            "temp": "24ºC",
+            "humiditydiv": "43%",
+            "temp_min": "24ºC",
+            "temp_max": "24ºC",
+            "sunrise": "undefined",
+            "sunset": "undefined"
+        },
+        {
+            "cityname": "Londres",
+            "temp": "27ºC",
+            "humiditydiv": "7%",
+            "temp_min": "27ºC",
+            "temp_max": "27ºC",
+            "sunrise": "undefined",
+            "sunset": "undefined"
+        },
+        {
+            "cityname": "Ovar",
+            "temp": "21ºC",
+            "humiditydiv": "68%",
+            "temp_min": "19ºC",
+            "temp_max": "26ºC",
+            "sunrise": "undefined",
+            "sunset": "undefined"
+        }
+    ]
+}
