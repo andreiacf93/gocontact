@@ -15,45 +15,58 @@ const server = app.listen(8000, () => {
   console.log("Server is up and listening on port 8000")
 })
 
-app.use(bodyParser.urlencoded({extended: true}))
+// cria o obj json pela primeira vez
+var obj = {
+  table: [],
+};
+// passa para json
+var json = JSON.stringify(obj);
+/* escrever obj json para ficheiro*/
+fs.writeFileSync('myjsonfile.json', json, 'utf-8');
+
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(express.static('./public'))
 
 // create a write stream (in append mode) -> LOG FILE
-var accessLogStream = fs.createWriteStream(path.join(__dirname, 'resume_requests.log'), {flags: 'a'})
-app.use(morgan('combined', {stream: accessLogStream}))
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'resume_requests.log'), { flags: 'a' })
+app.use(morgan('combined', { stream: accessLogStream }))
 
 // allow express to access our html (weather.html) file
 // http://localhost:8000/
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + "/" + "weather.html")
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + "/" + "weather.html")
 });
 
 app.post('/weathersearch', (req, res) => {
-	
-	let request = require('request');
-	let city = req.body.searchtxt;
-	let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appid}`
-	request(url, function (err, response, body) {
-    if(err){
-        console.log('error:', error);
+
+  let request = require('request');
+  let city = req.body.searchtxt;
+  let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appid}`
+  request(url, function (err, response, body) {
+    if (err) {
+      console.log('error:', error);
     } else {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        
-        fs.readFile('weather.html', 'utf-8', function(err, content) {
-          if (err) {
-              res.end('error occurred');
-              return;
-          }
+      res.writeHead(200, { 'Content-Type': 'text/html' });
 
-          let weather = JSON.parse(body)
-          var cityname = `${weather.name}`;
-          var temp = `${parseInt(weather.main.temp - 273)}ºC`;
-          var humiditydiv = `${weather.main.humidity}%`;
+      fs.readFile('weather.html', 'utf-8', function (err, content) {
+        if (err) {
+          res.end('error occurred');
+          return;
+        }
 
-          var renderedHtml = ejs.render(content, {cityname: cityname, temp:temp, humiditydiv:humiditydiv});  //get rendered HTML code
-          res.end(renderedHtml);
-        })
-      }
-    })
+        let weather = JSON.parse(body)
+        var cityname = `${weather.name}`;
+        var temp = `${parseInt(weather.main.temp - 273)}ºC`;
+        var humiditydiv = `${weather.main.humidity}%`;
+
+        var file = require('./myjsonfile.json');
+        file.table.push({ cityname: cityname, temp: temp, humiditydiv: humiditydiv });
+        fs.writeFileSync('myjsonfile.json', JSON.stringify(file), 'utf-8');
+
+        var renderedHtml = ejs.render(content, { cityname: cityname, temp: temp, humiditydiv: humiditydiv });  //get rendered HTML code
+        res.end(renderedHtml);
+      })
+    }
   })
+})
